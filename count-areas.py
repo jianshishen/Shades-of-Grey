@@ -2,6 +2,7 @@ import time
 import count
 import argparse
 
+# Start a timer
 start_time = time.time()
 
 # Setup arguments of this code
@@ -17,5 +18,6 @@ if (args.shape):
 else:
     print (c.apply(args.file,256,256))
 
+# Stop and display the timer
 elapsed_time = time.time() - start_time
 print('Duration:',time.strftime("%H:%M:%S", time.gmtime(elapsed_time)))
