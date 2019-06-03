@@ -1,4 +1,3 @@
-import os
 import numpy as np
 from collections import deque
 from multiprocessing import Pool
@@ -73,7 +72,7 @@ class Count(object):
    Returns:
       1*256 array
    """
-   def apply(self,file,height,width):
+   def apply(self,file,height,width,process):
       INIT = -1
       scale_indices = []
       current_scale = 0
@@ -108,7 +107,7 @@ class Count(object):
       scale_indices.append([final_scale_indices,total])
 
       # Use multiprocessing to count areas
-      with Pool(len(os.sched_getaffinity(0))) as pool:
+      with Pool(process) as pool:
          results=pool.map(self.count_areas, scale_indices)
 
       # Aggregate all arrays in results
