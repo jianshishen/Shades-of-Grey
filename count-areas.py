@@ -10,14 +10,15 @@ parser = argparse.ArgumentParser(description='Counting coloured areas in an imag
 parser.add_argument('file', type=str, help='Input a binary file')
 parser.add_argument('--shape', type=str, help='Input height and width')
 parser.add_argument('--process',type=int, help='Input number of processes')
+parser.add_argument('--maxtask',type=int, help='Input maximum number of tasks for each process')
 args = parser.parse_args()
 c=count.Count()
 
 # Print the amounts of coloured areas
 if (args.shape):
-    print (c.apply(args.file,int(args.shape.split(',')[0]),int(args.shape.split(',')[1]),args.process))
+    print (c.apply(args.file,int(args.shape.split(',')[0]),int(args.shape.split(',')[1]),args.process,args.maxtask))
 else:
-    print (c.apply(args.file,256,256,2))
+    print (c.apply(args.file,256,256,1,3))
 
 # Stop and display the timer
 elapsed_time = time.time() - start_time

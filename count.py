@@ -72,7 +72,9 @@ class Count(object):
    Returns:
       1*256 array
    """
-   def apply(self,file,height,width,process):
+   def apply(self,file,height,width,process,maxtask):
+      if process==None:process=1
+      if maxtask==None:maxtask=3
       INIT = -1
       scale_indices = []
       current_scale = 0
@@ -107,7 +109,7 @@ class Count(object):
       scale_indices.append([final_scale_indices,total])
 
       # Use multiprocessing to count areas
-      with Pool(process) as pool:
+      with Pool(processes=process,maxtasksperchild=maxtask) as pool:
          results=pool.map(self.count_areas, scale_indices)
 
       # Aggregate all arrays in results
